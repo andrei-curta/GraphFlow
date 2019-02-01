@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<map description="graph">
+    <nodes>
+        <node id="1" />
+        <node id="2" />
+        <node id="3" />
+        <node id="4" />
+    </nodes>
+    <arcs>
+        <arc from="1" to="2" max_capacity="2"  min_capacity="1"/>
+        <arc from="1" to="3" max_capacity="4"   min_capacity="2"/>
+        <arc from="2" to="3" max_capacity="3"  min_capacity="1"/>
+        <arc from="2" to="4" max_capacity="1"   min_capacity="2"/>
+        <arc from="3" to="4" max_capacity="5"  min_capacity="3"/>
+    </arcs>
+    <start id = "1"/>
+    <flush id = "4"/>
+</map>
