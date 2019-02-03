@@ -33,12 +33,22 @@ public class Graph {
     public Graph() {
     }
 
+    public Node getNodeByID(int nodeId){
+        return nodes.get(nodeId);
+    }
+
+    public ArrayList<Node> getNodes (){
+        return new ArrayList<Node>(nodes.values());
+    }
+
     /**
      * function used for printing the graph to console in a manner resembling the one that it is stored in
      * use for testing
      */
 
     public void printGraph(){
+        System.out.println("=== THE GRAPH ===");
+
         for(Map.Entry<Integer, Node> entry : nodes.entrySet()){
 
             for (Arc arc : entry.getValue().getAdjaciencies()) {
@@ -47,7 +57,6 @@ public class Graph {
             }
         }
     }
-
 
     /**
      * add nodes to the map of nodes, with the arc lists empty(will be populated by "addArcsToNodes")
@@ -62,7 +71,9 @@ public class Graph {
                 Element nodeElement = (Element) node;
                 int id = Integer.parseInt(nodeElement.getAttribute("id"));
 
-                nodes.put(id, new Node(id));
+                Node nodeToAdd = new Node(id);
+
+                nodes.put(id, nodeToAdd);
             }
         }
     }
@@ -86,11 +97,15 @@ public class Graph {
                 //get the startNode and endNode by the id specified in idEnd and create a new arc object
                 Node endNode = nodes.get(idEnd);
                 Node startNode = nodes.get(idStart);
-                Arc arcToAdd = new Arc(startNode, endNode, capacity);
+                Arc forwardArcToAdd = new Arc(startNode, endNode, capacity);
+
+                //create the corresponding backward edge
+                Arc backwardArc = new Arc(endNode, startNode, 0);
 
                 //add the arc created to the corresponding node
                 try {
-                    nodes.get(idStart).addArc(arcToAdd);
+                    nodes.get(idStart).addArc(forwardArcToAdd);
+                    nodes.get(idEnd).addArc(backwardArc);
                 } catch (NullPointerException e) {
                     System.out.println("Arc miss");
                 }

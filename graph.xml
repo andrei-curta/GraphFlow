@@ -1,32 +1,32 @@
 <?xml version="1.0"?>
 <map description="graph">
     <nodes>
-        <node id="0" />
-        <node id="1" />
-        <node id="2" />
-        <node id="3" />
-        <node id="4" />
-        <node id="5" />
-        <node id="6" />
-        <node id="7" />
+        <node id="0"/>
+        <node id="1"/>
+        <node id="2"/>
+        <node id="3"/>
+        <node id="4"/>
+        <node id="5"/>
+        <node id="6"/>
+        <node id="7"/>
     </nodes>
     <arcs>
         <arc from="0" to="1" max_capacity="10"/>
-        <arc from="0" to="3" max_capacity="5" />
+        <arc from="0" to="3" max_capacity="5"/>
         <arc from="0" to="5" max_capacity="15"/>
-        <arc from="1" to="2" max_capacity="9" />
+        <arc from="1" to="2" max_capacity="9"/>
         <arc from="1" to="4" max_capacity="15"/>
-        <arc from="1" to="3" max_capacity="4" />
+        <arc from="1" to="3" max_capacity="4"/>
         <arc from="2" to="4" max_capacity="15"/>
         <arc from="2" to="7" max_capacity="10"/>
-        <arc from="3" to="5" max_capacity="4" />
-        <arc from="3" to="4" max_capacity="8" />
+        <arc from="3" to="5" max_capacity="4"/>
+        <arc from="3" to="4" max_capacity="8"/>
         <arc from="4" to="7" max_capacity="10"/>
         <arc from="4" to="6" max_capacity="15"/>
         <arc from="5" to="6" max_capacity="16"/>
-        <arc from="6" to="3" max_capacity="6" />
+        <arc from="6" to="3" max_capacity="6"/>
         <arc from="6" to="7" max_capacity="10"/>
     </arcs>
-    <start id = "0"/>
-    <flush id = "7"/>
+    <start id="0"/>
+    <flush id="7"/>
 </map>

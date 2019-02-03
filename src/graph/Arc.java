@@ -6,29 +6,33 @@ public class Arc {
     private int flow = 0;
 
 
-    private  Node startNode;
+    private Node startNode;
     private Node endNode;
 
-    public Node getOtherNode(Node node){
-        if(node.equals(startNode)){
+    public Node getOtherNode(Node node) {
+        if (node.id == startNode.id) {
             return endNode;
-        }else {
+        } else {
             return startNode;
         }
     }
 
-    public int getResidualCapacityTo(Node node){
-        if(node.getId() == startNode.id){
+    public int getResidualCapacityTo(Node node) {
+        if (node.getId() == startNode.id) {
             return flow;    //forward edge
-        }else{
+        } else {
             return max_capacity - flow; //backward edge
         }
     }
 
-    public void addResiduaFlowTo(Node node, int deltaFlow){
-        if(node.getId() == startNode.id){
+    public void addFlow(int flowToAdd) {
+        flow += flowToAdd;
+    }
+
+    public void addResiduaFlowTo(Node node, int deltaFlow) {
+        if (node.getId() == startNode.id) {
             flow -= deltaFlow;  //forward edge
-        }else{
+        } else {
             flow += deltaFlow; //backward edge
         }
     }
@@ -48,7 +52,10 @@ public class Arc {
         return max_capacity;
     }
 
-    public int getResidualCapacity(){
+    public int getResidualCapacity() {
+        if(max_capacity == 0){
+            return flow;
+        }
         return max_capacity - flow;
     }
 

@@ -7,10 +7,16 @@ import java.util.ArrayList;
  */
 public class Node {
 
-
     int id;
     ArrayList<Arc> adjacencies = new ArrayList<>();
 
+    public Arc getArcByEndNodeId(int endNodeID){
+        for(Arc arc : adjacencies){
+            if(arc.getEndNode().getId() == endNodeID)
+                return arc;
+        }
+        return null;
+    }
 
     public Node(int id) {
         this.id = id;
@@ -24,16 +30,16 @@ public class Node {
         this.id = id;
     }
 
-    public void addArc(Arc arcToAdd){
+    public void addArc(Arc arcToAdd) {
         adjacencies.add(arcToAdd);
     }
 
-    public ArrayList<Arc> getAdjaciencies(){
+    public ArrayList<Arc> getAdjaciencies() {
         return adjacencies;
     }
 
     @Override
-    public String toString(){
-        return  Integer.toString(id);
+    public String toString() {
+        return Integer.toString(id);
     }
 }

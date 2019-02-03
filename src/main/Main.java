@@ -1,15 +1,17 @@
 package main;
 
+import flows.EdmondsKarp;
 import flows.FordFulkerson;
 import graph.Graph;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         Graph graph = new Graph();
         graph.readFromFile("graph.xml");
         //graph.printGraph();
 
+        /*
         FordFulkerson fordFulkerson = new FordFulkerson(graph);
         fordFulkerson.edmondsKarp_max();
         System.out.println("======");
@@ -17,5 +19,10 @@ public class Main {
         System.out.println("The maximum value of the flow thought the graph is: " + fordFulkerson.getValueMaxFlow());
         System.out.println("======");
         fordFulkerson.printResidualGraph();
-        }
+        */
+
+        EdmondsKarp edmondsKarp = new EdmondsKarp(graph);
+        System.out.println("max flow: " + edmondsKarp.getValueMaxFlow());
+
+    }
 }
