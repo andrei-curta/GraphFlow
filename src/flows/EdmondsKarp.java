@@ -6,22 +6,21 @@ import graph.Node;
 
 import java.util.*;
 
-public class EdmondsKarp {
+public abstract class EdmondsKarp {
 
-    Map<Node, Arc> parent;
-    Queue<Node> visited;
+    protected Map<Node, Arc> parent;
+    protected Queue<Node> visited;
 
-    int valueMaxFlow = 0;
+    int flowValue = 0;
 
-    Graph graph;
+    protected Graph graph;
 
     public EdmondsKarp(Graph graph) {
         this.graph = graph;
 
-        runEdmondsKarp();
     }
 
-    private void runEdmondsKarp() {
+    protected void runEdmondsKarp() {
 
         //reset parent and initialize the
         parent = new HashMap<>();
@@ -44,7 +43,7 @@ public class EdmondsKarp {
                 Node currentNode = visited.remove();
 
                 for (Arc arc : currentNode.getAdjaciencies()) {
-                    if (arc.getResidualCapacity() > 0 && !parent.containsKey(arc.getEndNode())) {
+                    if (checkResidualCapacity(arc) && !parent.containsKey(arc.getEndNode())) {
                         parent.put(arc.getEndNode(), arc);
                         visited.add(arc.getEndNode());
                     }
@@ -53,43 +52,17 @@ public class EdmondsKarp {
 
 
             if (parent.containsKey(graph.getFlush())) {
-                hasAugmentingPath = increaseFlow();
-               // hasAugmentingPath = false;
+                hasAugmentingPath = updateFlow();
+                // hasAugmentingPath = false;
             }
         } while (parent.containsKey(graph.getFlush()) && hasAugmentingPath);
     }
 
-    private boolean increaseFlow() {
-        int bottleneckCapacity = Integer.MAX_VALUE;
+    abstract boolean checkResidualCapacity(Arc arc);
 
-        //find the bottleneck capacity
-        for (Node node = graph.getFlush(); node != graph.getStart(); node = parent.get(node).getOtherNode(node)) {
-            bottleneckCapacity = Math.min(bottleneckCapacity, parent.get(node).getResidualCapacity());
+    abstract boolean updateFlow();
 
-            System.out.print(node.getId() + " ");
-        }
-        System.out.println();
-
-        if(bottleneckCapacity == Integer.MAX_VALUE)
-            return false;
-
-        //increase flow along the augmenting path ( aka DMF )
-        for (Node node = graph.getFlush(); node != graph.getStart(); node = parent.get(node).getOtherNode(node)) {
-            parent.get(node).addFlow(bottleneckCapacity);
-
-            System.out.print("Arc (" + node.getId() + ", " + parent.get(node).getOtherNode(node) + ") " +  parent.get(node).getFlow() + " ");
-            //update the backward edge
-            Node otherNode = parent.get(node).getOtherNode(node);
-           // otherNode.getArcByEndNodeId(node.getId()).addFlow(bottleneckCapacity);
-
-            System.out.println("Arc (" + otherNode.getId() + ", " + otherNode.getArcByEndNodeId(node.getId()).getOtherNode(otherNode) + ") " + otherNode.getArcByEndNodeId(node.getId()).getFlow());
-            //System.out.print(node.getId() + " f:" + parent.get(node).getFlow() + "; ");
-        }
-        valueMaxFlow += bottleneckCapacity;
-        return true;
-    }
-
-    public int getValueMaxFlow(){
-        return valueMaxFlow;
+    public int getFlowValue() {
+        return flowValue;
     }
 }

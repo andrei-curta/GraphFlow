@@ -2,6 +2,8 @@ package main;
 
 import flows.EdmondsKarp;
 import flows.FordFulkerson;
+import flows.MaxFlow;
+import flows.MinFlow;
 import graph.Graph;
 
 public class Main {
@@ -21,8 +23,11 @@ public class Main {
         fordFulkerson.printResidualGraph();
         */
 
-        EdmondsKarp edmondsKarp = new EdmondsKarp(graph);
-        System.out.println("max flow: " + edmondsKarp.getValueMaxFlow());
+        //MaxFlow maxFlow = new MaxFlow(graph);
+        //System.out.println("max flow: " + maxFlow.getFlowValue());
+
+        MinFlow minFlow = new MinFlow(graph);
+        System.out.println("Min flow: " + minFlow.getFlowValue());
 
     }
 }

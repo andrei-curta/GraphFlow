@@ -92,15 +92,16 @@ public class Graph {
                 //get the atributes from the node element
                 int idStart = Integer.parseInt(nodeElement.getAttribute("from"));
                 int idEnd = Integer.parseInt(nodeElement.getAttribute("to"));
-                int capacity = Integer.parseInt(nodeElement.getAttribute("max_capacity"));
+                int max_capacity = Integer.parseInt(nodeElement.getAttribute("max_capacity"));
+                int min_capacity = Integer.parseInt(nodeElement.getAttribute("min_capacity"));
 
                 //get the startNode and endNode by the id specified in idEnd and create a new arc object
                 Node endNode = nodes.get(idEnd);
                 Node startNode = nodes.get(idStart);
-                Arc forwardArcToAdd = new Arc(startNode, endNode, capacity);
+                Arc forwardArcToAdd = new Arc(startNode, endNode, max_capacity, min_capacity);
 
                 //create the corresponding backward edge
-                Arc backwardArc = new Arc(endNode, startNode, 0);
+                Arc backwardArc = new Arc(endNode, startNode, 0, 0);
 
                 //add the arc created to the corresponding node
                 try {

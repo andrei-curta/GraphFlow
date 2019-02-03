@@ -3,6 +3,12 @@ package graph;
 public class Arc {
 
     private int max_capacity;
+
+    public int getMin_capacity() {
+        return min_capacity;
+    }
+
+    private int min_capacity;
     private int flow = 0;
 
 
@@ -37,10 +43,11 @@ public class Arc {
         }
     }
 
-    public Arc(Node startNode, Node endNode, int capacity) {
-        this.max_capacity = capacity;
-        this.endNode = endNode;
+    public Arc(Node startNode, Node endNode, int max_capacity, int min_capacity) {
+        this.max_capacity = max_capacity;
+        this.min_capacity = min_capacity;
         this.startNode = startNode;
+        this.endNode = endNode;
     }
 
     public Arc(Node endNode, int capacity) {
@@ -80,7 +87,7 @@ public class Arc {
     }
 
 
-    public Node getEndNode() {
+    public Node getEndNode(){
         return endNode;
     }
 

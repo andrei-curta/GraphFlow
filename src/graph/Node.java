@@ -10,9 +10,9 @@ public class Node {
     int id;
     ArrayList<Arc> adjacencies = new ArrayList<>();
 
-    public Arc getArcByEndNodeId(int endNodeID){
-        for(Arc arc : adjacencies){
-            if(arc.getEndNode().getId() == endNodeID)
+    public Arc getArcByEndNodeId(int endNodeID) {
+        for (Arc arc : adjacencies) {
+            if (arc.getEndNode().getId() == endNodeID)
                 return arc;
         }
         return null;
